@@ -4,6 +4,7 @@
 #include <vector>
 #include "SDL.h"
 #include "snake.h"
+enum class FoodType{Normal, Shrink, Killer};
 
 class Renderer {
  public:

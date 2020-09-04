@@ -65,6 +65,19 @@ void Game::PlaceFood() {
   }
 }
 
+void Game::PlaceKiller() {
+  int x, y;
+  while (true)
+  {
+    x = random_w(engine);
+    y = random_h(engine);
+  }
+  if (!snake.SnakeCell(x,y)) {
+    
+  }
+  
+}
+
 void Game::Update() {
   if (!snake.alive) return;
 

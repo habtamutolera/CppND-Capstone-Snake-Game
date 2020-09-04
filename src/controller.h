@@ -10,6 +10,10 @@ class Controller {
  private:
   void ChangeDirection(Snake &snake, Snake::Direction input,
                        Snake::Direction opposite) const;
+  
+  void Pause(Snake &snake) const;
+  void Resume(Snake &snake) const;
+  void Reset(Snake &snake) const;
 };
 
 #endif
