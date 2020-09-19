@@ -9,13 +9,6 @@ void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
   return;
 }
 
-void Controller::Pause(Snake &snake) {
-  snake.ChangeState(Snake::State::Pause);
-}
-
-void Controller::Resume(Snake &snake) {
-  snake.ChangeState(Snake::State::Running)
-}
 void Controller::HandleInput(bool &running, Snake &snake) const {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
@@ -43,19 +36,8 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
                           Snake::Direction::kLeft);
           break;
 
-        case SDLK_PAUSE:
-          Pause(snake);
-          break;
-        
-        case SDLK_q:
-          break;
-        
-        case SDLK_r:
-          Resume(snake);
-          break;
-   
-        case SDLK_s:
-          Reset(snake);
+        case SDLK_END:
+          running = false;
           break;
       }
     }

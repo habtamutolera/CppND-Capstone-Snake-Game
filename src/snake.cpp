@@ -47,12 +47,19 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   // Add previous head location to vector
   body.push_back(prev_head_cell);
 
-  if (!growing) {
+  if (bodySize == SnakeSize::Constant) {
     // Remove the tail from the vector.
     body.erase(body.begin());
-  } else {
-    growing = false;
+  } 
+  else if (bodySize == SnakeSize::Growing) {
+    //growing = false;
+    bodySize = SnakeSize::Constant;
     size++;
+  }
+  else {
+    bodySize = SnakeSize::Constant;
+    size--;
+    body.erase(body.begin(), body.begin()+2);
   }
 
   // Check if the snake has died.
@@ -63,8 +70,8 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   }
 }
 
-void Snake::GrowBody() { growing = true; }
-void Snake::ShrinkBody() { growing = false; }
+void Snake::GrowBody() { bodySize = SnakeSize::Growing; }//growing = true; }
+void Snake::ShrinkBody() { bodySize = SnakeSize::Shrinking; }//growing = false; }
 // Inefficient method to check if cell is occupied by snake.
 bool Snake::SnakeCell(int x, int y) {
   if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y)) {
@@ -76,19 +83,4 @@ bool Snake::SnakeCell(int x, int y) {
     }
   }
   return false;
-}
-
-void Snake::ChangeState(State state)
-{
-  snake_state = state;
-  if (state == State::Running)
-  {
-    speed = 0.0f;
-  }
-  else
-  {
-    //calculate speed from size of the snake
-    speed = 0.2f;
-  }
-  
 }

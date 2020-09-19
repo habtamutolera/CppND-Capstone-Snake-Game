@@ -7,7 +7,7 @@
 class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
-  enum class State {Running, Paused};
+  enum class SnakeSize { Growing, Shrinking, Constant };
 
   Snake(int grid_width, int grid_height)
       : grid_width(grid_width),
@@ -20,7 +20,7 @@ class Snake {
   void GrowBody();
   void ShrinkBody();
   bool SnakeCell(int x, int y);
-  void ChangeState(State state);
+  //void ChangeState(State state);
 
   Direction direction = Direction::kUp;
 
@@ -36,9 +36,10 @@ class Snake {
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
   bool growing{false};
+  SnakeSize bodySize = SnakeSize::Constant;
   int grid_width;
   int grid_height;
-  State snake_state = State::Running;
+  //State snake_state = State::Running;
 };
 
 #endif

@@ -1,5 +1,7 @@
-#include "game.h"
 #include <iostream>
+#include <algorithm>
+#include <utility>
+#include "game.h"
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
@@ -7,7 +9,9 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       engine(dev()),
       random_w(0, static_cast<int>(grid_width)),
       random_h(0, static_cast<int>(grid_height)) {
-  PlaceFood();
+  PlaceFood(FoodType::Normal);
+  PlaceFood(FoodType::Shrink);
+
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -50,32 +54,29 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   }
 }
 
-void Game::PlaceFood() {
+void Game::PlaceFood(FoodType foodType) {
   int x, y;
+  SDL_Point point;
   while (true) {
     x = random_w(engine);
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
     // food.
-    if (!snake.SnakeCell(x, y)) {
-      food.x = x;
-      food.y = y;
+    if (!snake.SnakeCell(x, y) && !FoodCell(x,y)) {
+      point = {x,y};
+      food.push_back(std::make_pair(point,foodType));
       return;
     }
   }
 }
 
-void Game::PlaceKiller() {
-  int x, y;
-  while (true)
-  {
-    x = random_w(engine);
-    y = random_h(engine);
+bool Game::FoodCell(int x, int y) const {
+  for (auto &f : food) {
+    if (x == f.first.x && y == f.first.y) {
+      return true;
+    }
   }
-  if (!snake.SnakeCell(x,y)) {
-    
-  }
-  
+  return false;
 }
 
 void Game::Update() {
@@ -85,15 +86,68 @@ void Game::Update() {
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
+  std::vector<FoodType> foodToPlace;
 
-  // Check if there's food over here
-  if (food.x == new_x && food.y == new_y) {
-    score++;
-    PlaceFood();
-    // Grow snake and increase speed.
-    snake.GrowBody();
-    snake.speed += 0.02;
+  // Check if there's food over
+  auto eten_food = food.end();
+  for (auto it = food.begin(); it != food.end(); ++it) {
+  //while (it != food.end()) {
+    if (it->first.x == new_x && it->first.y == new_y) {
+      if (it->second == FoodType::Normal) {
+        score++;
+        snake.GrowBody();
+        snake.speed += 0.02;
+        normalCount++;
+        if (normalCount == 5) {
+          foodToPlace.push_back(FoodType::Special);
+          normalCount = 0;
+        }
+        else {
+          foodToPlace.push_back(FoodType::Normal);
+        }
+        eten_food = it;
+      }
+      else if (it->second == FoodType::Shrink) {
+        shrinkCount++;
+        normalCount = 0;
+        //snake.ShrinkBody();
+        if (score > 0 and snake.size > 1) {
+          score--;
+          snake.speed -= 0.02;
+          snake.ShrinkBody();
+        }
+        if (shrinkCount == 5) {
+          foodToPlace.push_back(FoodType::Killer);
+          shrinkCount = 0;
+        }
+        else {
+          foodToPlace.push_back(FoodType::Shrink);
+        }
+        eten_food = it;
+      }
+      else if (it->second == FoodType::Killer) {
+        snake.alive = false;
+      }
+      else if (it->second == FoodType::Special) {
+        score += 5;
+        normalCount = 0;
+        snake.GrowBody();
+        foodToPlace.push_back(FoodType::Normal);
+        eten_food = it;
+      }
+      
+      //food.erase(it--);
+      //food.erase(it);
+    }
+    // else {
+    //   ++it;
+    // }
   }
+  if (eten_food != food.end()) food.erase(eten_food);
+  for(auto &f : foodToPlace) {
+    PlaceFood(f);
+  }
+ 
 }
 
 int Game::GetScore() const { return score; }
