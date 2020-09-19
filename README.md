@@ -1,6 +1,6 @@
 # CPPND: Capstone Snake Game Example
 
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+This is a project based on a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
 
 <img src="snake_game.gif"/>
 
@@ -34,17 +34,20 @@ There are 6 classes in the project.
 |Controller  | Gives interface to the user to control the game       |
 |Game        | Runs the game in infinite loop                        |
 |Menu        | Provides user a menu before the game starts           |
-|Record      | Read, write and print                                 |
+|Record      | Read, write and print game record                     |
 |Renderer    | Render the game on the screen                         |
 |Snake       | Keeps track of speed, size and location of snake      |
 
 ## The project meets the following rubric points
 
 1. The project demonstrate an understanding of C++ functions and control structures
-2. The project accepts and processes user input
-3. The project uses Object Oriented Programming techniques
-4. Class constructors utilizes memeber initialization lists
-5. The project makes use of references in function declarations
+2. The project reads data from a file and process the data, or the program writes data to a file
+3. The project accepts user input and process the input
+4. The project accepts and processes user input
+5. The project uses Object Oriented Programming techniques
+6. Classes use appropriate access specifiers for class members
+7. Class constructors utilizes memeber initialization lists
+8. The project makes use of references in function declarations
 
 ## Play the Game
 

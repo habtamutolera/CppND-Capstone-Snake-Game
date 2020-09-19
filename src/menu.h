@@ -8,6 +8,6 @@ class Menu {
     void optionMenu();
     int getOption();
     private:
-    int option;
+    int option_;
 };
 #endif

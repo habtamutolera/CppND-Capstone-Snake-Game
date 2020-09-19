@@ -5,15 +5,15 @@
 
 class Record {
     public:
-    Record(std::string fileName);
-    void AddRecord(std::string name, int score);
+    Record(std::string const &fileName);
+    void AddRecord(std::string &name, int score);
     void ReadRecord();
     void PrintRecord();
-    void WriteRecord(std::string name, int score);
+    void WriteRecord(std::string &name, int score);
 
     private:
-    std::string _fileName;
-    std::vector<std::pair<std::string, int >> _record;
+    std::string fileName_;
+    std::vector<std::pair<std::string, int >> record_;
 
 };
 #endif

@@ -71,7 +71,7 @@ void Game::PlaceFood(FoodType foodType) {
 }
 
 bool Game::FoodCell(int x, int y) const {
-  for (auto &f : food) {
+  for (auto const &f : food) {
     if (x == f.first.x && y == f.first.y) {
       return true;
     }
@@ -110,7 +110,6 @@ void Game::Update() {
       else if (it->second == FoodType::Shrink) {
         shrinkCount++;
         normalCount = 0;
-        //snake.ShrinkBody();
         if (score > 0 and snake.size > 1) {
           score--;
           snake.speed -= 0.02;
@@ -135,19 +134,12 @@ void Game::Update() {
         foodToPlace.push_back(FoodType::Normal);
         eten_food = it;
       }
-      
-      //food.erase(it--);
-      //food.erase(it);
     }
-    // else {
-    //   ++it;
-    // }
   }
   if (eten_food != food.end()) food.erase(eten_food);
   for(auto &f : foodToPlace) {
     PlaceFood(f);
   }
- 
 }
 
 int Game::GetScore() const { return score; }
