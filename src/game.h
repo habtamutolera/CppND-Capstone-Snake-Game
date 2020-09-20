@@ -25,12 +25,13 @@ class Game {
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
-
   int score{0};
-
+  static constexpr std::size_t kScreenWidth{640};
+  static constexpr std::size_t kScreenHeight{640};
   void PlaceFood(FoodType foodType);
   void Update();
   bool FoodCell(int x, int y) const;
+
 };
 
 #endif

@@ -6,9 +6,9 @@
 #include <algorithm>
 #include "record.h"
 
-bool Compare(std::pair<std::string, int> &a, std::pair<std::string, int> &b) {
-    return a.second > b.second;
-}
+// bool Compare(std::pair<std::string, int> const &a, std::pair<std::string, int> const &b) {
+//     return a.second > b.second;
+// }
 
 Record::Record(std::string const &fileName): fileName_(fileName)
 {
@@ -39,12 +39,12 @@ void Record::ReadRecord() {
 
 void Record::PrintRecord() {
     
-    sort(record_.begin(), record_.end(), Compare);
+    std::sort(record_.begin(), record_.end(), Record::CompareRecord);
     std::cout << std::left << std::setw(10) << std::setfill(' ') << "Player" << std::setw(10) << std::setfill(' ')<< "Score" << std::endl;
     for(auto const &record : record_) {
         std::ostringstream stream;
         //stream << std::setw(10) << record.first << ' ' << std::setw(10) << record.second;
-        std::cout << std::left << std::setw(10) << std::setfill(' ') << record.first << std::setw(10) << std::setfill(' ') << record.second << std::endl;
+        std::cout << std::left << std::setw(10) << std::setfill(' ') << record.first << std::right << std::setw(10) << std::setfill(' ') << record.second << std::endl;
         //std::cout << stream.str() << std::endl;
     }
 }
@@ -61,4 +61,7 @@ void Record::WriteRecord(std::string &name, int score) {
         std::cerr << fileName_ << " could not be opened for writing!" << std::endl;
     }
 }
- 
+
+bool Record::CompareRecord(std::pair<std::string, int> const &a, std::pair<std::string, int> const &b) {
+    return a.second > b.second;
+} 

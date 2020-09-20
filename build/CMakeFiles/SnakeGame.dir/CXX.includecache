@@ -10,6 +10,18 @@
 snake.h
 /home/workspace/CppND-Capstone-Snake-Game/src/snake.h
 
+/home/workspace/CppND-Capstone-Snake-Game/src/game.cpp
+iostream
+-
+algorithm
+-
+utility
+-
+game.h
+/home/workspace/CppND-Capstone-Snake-Game/src/game.h
+SDL.h
+/home/workspace/CppND-Capstone-Snake-Game/src/SDL.h
+
 /home/workspace/CppND-Capstone-Snake-Game/src/game.h
 random
 -
@@ -37,16 +49,6 @@ menu.h
 /home/workspace/CppND-Capstone-Snake-Game/src/menu.h
 record.h
 /home/workspace/CppND-Capstone-Snake-Game/src/record.h
-
-/home/workspace/CppND-Capstone-Snake-Game/src/menu.cpp
-iostream
--
-string
--
-iomanip
--
-menu.h
-/home/workspace/CppND-Capstone-Snake-Game/src/menu.h
 
 /home/workspace/CppND-Capstone-Snake-Game/src/menu.h
 

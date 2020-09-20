@@ -40,14 +40,13 @@ There are 6 classes in the project.
 
 ## The project meets the following rubric points
 
-1. The project demonstrate an understanding of C++ functions and control structures
-2. The project reads data from a file and process the data, or the program writes data to a file
-3. The project accepts user input and process the input
-4. The project accepts and processes user input
-5. The project uses Object Oriented Programming techniques
-6. Classes use appropriate access specifiers for class members
-7. Class constructors utilizes memeber initialization lists
-8. The project makes use of references in function declarations
+1. The project demonstrate an understanding of C++ functions and control structures. In record.cpp, loops and conditions are used in functions ReadRecord(), WriteRecord(), and PrintRecord(). While loop are used at line 27 and for loop is used at lines 44 and 56. In menu.cpp, while loop is used at line 14. If-else condition is also used in record.cpp starting from lines 26-37 and 55-62. If condition is also used in menu.cpp at line 15.
+2. The project reads data from a file and process the data, or the program writes data to a file. In record.cpp, ReadRecord() function(lines 22-38) reads data from  record.txt and WriteRecord() function (lines 52-63) writes record to file. In addition to the newly added classes, control structures are used in game.cpp from lines 74-78 and also at many places in function Update() function from lines 83-143.
+3. The project accepts user input and process the input. main.cpp accepts input from user at line 32. menu.cpp also accepts input from user in lines 14-19.
+4. The project uses Object Oriented Programming techniques. The project code is organized into classes with class attributes to hold data, and class methods to perform tasks. The newly added classes define and implemented in record.h, record.cpp, menu.h and menu.cpp demonstrates this.
+5. Classes use appropriate access specifiers for class members. In record.h, attributes and functions that are not used by another class out side of Record class are define private and those that are called from main.cpp are define as public. The same for menu.h. 
+6. Class constructors utilizes memeber initialization lists. In record.cpp, Record constructor(line 13) uses initialization list.
+7. The project makes use of references in function declarations. In record.h, AddRecord(line 9), WriteRecord(line 12) and CompareRecord(line 65) functions make use of references in function declaration.
 
 ## Play the Game
 

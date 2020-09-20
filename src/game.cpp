@@ -58,8 +58,8 @@ void Game::PlaceFood(FoodType foodType) {
   int x, y;
   SDL_Point point;
   while (true) {
-    x = random_w(engine);
-    y = random_h(engine);
+    x = (random_w(engine)%kScreenWidth)-1;
+    y = (random_h(engine)%kScreenHeight)-1;
     // Check that the location is not occupied by a snake item before placing
     // food.
     if (!snake.SnakeCell(x, y) && !FoodCell(x,y)) {
